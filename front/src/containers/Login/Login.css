@@ -10,7 +10,12 @@ div {
     margin-bottom: 20px;
 }
 
-form button {
+form .send {
     display: block;
     margin-left: 49%;
+}
+
+.facebook {
+    display: block;
+    margin: 10px 0 10px 45.5%;
 }

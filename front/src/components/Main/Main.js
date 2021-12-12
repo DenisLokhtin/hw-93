@@ -1,28 +1,29 @@
 import React, {useEffect} from 'react';
-import ArtistCard from "../ArtistCard/ArtistCard";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchArtist} from "../../store/actions/actions";
+import {fetchEvents} from "../../store/actions/actions";
 import './Main.css'
+import EventCard from "../EventCard/EventCard";
+import {Link} from "react-router-dom";
 
 
 const Main = (props) => {
     const dispatch = useDispatch();
-    const artist = useSelector(state => state.reducer.artist);
+    const event = useSelector(state => state.reducer.events);
 
     useEffect(() => {
-        dispatch(fetchArtist())
-    }, [dispatch])
+        dispatch(fetchEvents())
+    }, [dispatch]);
 
-    const  printArtist = () => {
-        if (artist) {
-            return artist.map(artist => {
+    const  printEvent = () => {
+        if (event) {
+            return event.map(event => {
                 return (
-                    <ArtistCard
-                        key={artist._id}
-                        file={artist.file}
-                        title={artist.title}
-                        history={props.history}
-                        id={artist._id}
+                    <EventCard
+                        key={event._id}
+                        title={event.title}
+                        text={event.text}
+                        date={event.date}
+                        duration={event.duration}
                     />
                 )
             })
@@ -32,10 +33,21 @@ const Main = (props) => {
     return (
         <div>
             <div className="main-header">
-                <h2>Artist</h2>
+                <h2>Events list</h2>
+                <Link to='/newEvent' className="newEvent">New event</Link>
             </div>
-            <div>
-                {printArtist()}
+            <div className="cards">
+                <EventCard/>
+                <EventCard/>
+                <EventCard/>
+                <EventCard/>
+                <EventCard/>
+                <EventCard/>
+                <EventCard/>
+                <EventCard/>
+                <EventCard/>
+                <EventCard/>
+                {printEvent()}
             </div>
         </div>
     )

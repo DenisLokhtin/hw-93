@@ -20,7 +20,7 @@ const Toolbar = () => {
         <div className="border">
             <div className="toolbar">
                 <div className="header">
-                    <Link to="/">Market</Link>
+                    <Link to="/">Events</Link>
                 </div>
                 <div>
                     {menu()}

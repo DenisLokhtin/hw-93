@@ -1,0 +1,23 @@
+.eventCard {
+    border: 2px solid black;
+    margin: 5px;
+    padding: 5px;
+    width: 300px;
+    border-radius: 2px;
+}
+
+.eventCard div {
+    text-align: left;
+}
+
+.eventCard .edit {
+    text-align: right;
+}
+
+.eventCard .edit span {
+    color: blue;
+    text-decoration: underline;
+    font-size: 18px;
+    cursor: pointer;
+    user-select: none;
+}

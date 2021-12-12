@@ -1,7 +1,6 @@
 import axiosApi from "../../axiosApi";
 import {historyPush} from "./historyAction";
 import {toast} from "react-toastify";
-import axios from "axios";
 
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
 export const REGISTER_USER_FAILURE = 'REGISTER_USER_FAILURE';
@@ -59,6 +58,7 @@ export const facebookLogin = (data) => {
         axiosApi.post('/users/facebookLogin', data).then(
             response => {
                 dispatch(loginUserSuccess(response.data.user));
+                toast.success('Login successful');
             },
             error => {
                 dispatch(loginUserFailure(error.response.data));

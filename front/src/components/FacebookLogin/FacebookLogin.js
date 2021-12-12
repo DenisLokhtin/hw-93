@@ -1,7 +1,7 @@
 import React from 'react';
 import FacebookLoginButton from 'react-facebook-login/dist/facebook-login-render-props';
-import {Button} from "@material-ui/core";
 import {useDispatch} from "react-redux";
+import './FacebookLogin.css'
 import {facebookAppId} from "../../constants";
 
 import {facebookLogin} from "../../store/actions/usersAction";
@@ -18,12 +18,12 @@ const FacebookLogin = () => {
 
 
     return <FacebookLoginButton
-    appId={facebookAppId}
-    fields="name,email,picture"
-    render={renderProps => (
-    <Button onClick={renderProps.onClick}>Enter with Facebook</Button>
+        appId={facebookAppId}
+        fields="name,email,picture"
+        render={renderProps => (
+            <button className='facebook' onClick={renderProps.onClick}>Enter with Facebook</button>
         )}
-    callback={facebookResponse}
+        callback={facebookResponse}
     />
 };
 

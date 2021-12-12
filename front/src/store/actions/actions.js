@@ -1,44 +1,31 @@
 import axios from "axios";
+import {toast} from "react-toastify";
 
-export const SET_ARTIST = 'SET_ARTIST';
-export const SET_ALBUMS = 'SET_ALBUMS';
-export const SET_TRACKS = 'SET_TRACKS';
+export const SET_EVENTS = 'SET_EVENTS';
 
-export const setArtist = value => ({type: SET_ARTIST, payload: value});
-export const setAlbums = value => ({type: SET_ALBUMS, payload: value});
-export const setTracks = value => ({type: SET_TRACKS, payload: value});
+export const setEvents = value => ({type: SET_EVENTS, payload: value});
 
-export const fetchArtist = () => {
-  return async dispatch => {
-    try {
-      const response = await axios.get('http://localhost:8001/artist');
-      dispatch(setArtist(response.data));
-    } catch (e) {
-      console.log(e)
-    }
-  };
+export const fetchEvents = () => {
+    return async dispatch => {
+        try {
+            const response = await axios.get('http://localhost:8001/events');
+            dispatch(setEvents(response.data));
+        } catch (e) {
+            console.log(e)
+        }
+    };
 };
 
-export const fetchAlbums = () => {
-  return async dispatch => {
-    try {
-      const response = await axios.get('http://localhost:8001/album');
-      dispatch(setAlbums(response.data));
-    } catch (e) {
-      console.log(e)
-    }
-  };
+export const createEvent = data => {
+    return async () => {
+        try {
+            await axios.post('http://localhost:8001/events', data);
+            toast.success('Event Created');
+        } catch (e) {
+            console.log(e)
+        }
+    };
 };
 
-export const fetchTracks = () => {
-  return async dispatch => {
-    try {
-      const response = await axios.get('http://localhost:8001/track');
-      dispatch(setTracks(response.data));
-    } catch (e) {
-      console.log(e)
-    }
-  };
-};
 
 
