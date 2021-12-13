@@ -4,6 +4,7 @@
     padding: 5px;
     width: 300px;
     border-radius: 2px;
+    word-wrap: break-word;
 }
 
 .eventCard div {

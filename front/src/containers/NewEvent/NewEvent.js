@@ -1,20 +1,32 @@
 import React, {useState} from 'react';
-import {useDispatch} from "react-redux";
-import {SET_EVENTS} from "../../store/actions/actions";
+import {useDispatch, useSelector} from "react-redux";
+import {createEvent} from "../../store/actions/actions";
 
 const NewEvent = (props) => {
     const dispatch = useDispatch();
+    const user = useSelector(state => state.users.user);
+
+
+
+    const userCheck = () => {
+        if (user !== null) {
+            return user.username;
+        } else {
+            return ''
+        }
+    };
 
     const [data, setData] = useState({
         text: '',
         title: '',
         date: '',
         duration: 1,
+        author: userCheck(),
     });
 
     const onSubmit = (e) => {
         e.preventDefault();
-        dispatch(SET_EVENTS());
+        dispatch(createEvent(data));
     };
 
     return (
@@ -27,10 +39,9 @@ const NewEvent = (props) => {
                 />
             </p>
             <p>
-                <input
+                <textarea
                     value={data.text}
                     onChange={(event => setData({...data, text: event.target.value}))}
-                    type="text"
                     placeholder="text"
                 />
             </p>

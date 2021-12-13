@@ -1,0 +1,40 @@
+const express = require('express');
+const Event = require('../models/Event');
+const auth = require('../middleware/auth');
+
+const router = express.Router();
+
+router.get('/', auth, async (req, res) => {
+  try {
+    const Events = await Event.find({author: req.user.username});
+    res.send(Events);
+  } catch (e) {
+    res.sendStatus(500);
+  }
+});
+
+router.post('/', auth, async (req, res) => {
+  const body = {
+    title: req.body.title,
+    text: req.body.text,
+    date: req.body.date,
+    duration: req.body.duration,
+    author: req.body.author,
+  };
+
+  if (req.share) {
+    body.share = req.body.share;
+  }
+
+  const events = new Event(body);
+
+  try {
+    await events.save();
+    res.send(events);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(400);
+  }
+});
+
+module.exports = router;

@@ -20,7 +20,6 @@ const Login = () => {
 
     const submitFormHandler = e => {
         e.preventDefault();
-        dispatch(loginUser({...user}));
     };
 
     return (
@@ -30,7 +29,7 @@ const Login = () => {
                 <input name="username" value={user.username} onChange={e => (inputChangeHandler(e))} type="text" placeholder="Username" autoComplete="on"/>
                 <input name="password" value={user.password} onChange={e => (inputChangeHandler(e))} type="password" placeholder="Password" autoComplete="on"/>
                 <FacebookLogin classname="facebook"/>
-                <button className="send">Send</button>
+                <button onClick={() => dispatch(loginUser({...user}))} className="send">Send</button>
             </form>
         </div>
     );

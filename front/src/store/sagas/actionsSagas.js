@@ -1,16 +1,22 @@
 import {takeEvery, put} from 'redux-saga/effects';
-import {SET_EVENTS, setEvents} from "../actions/actions";
+import {FETCH_EVENTS, setEvents} from "../actions/actions";
 import axiosApi from "../../axiosApi";
+import {toast} from "react-toastify";
 
 export function* categoriesSagas() {
     try {
-        const response = yield axiosApi.get('/events');
+        const response = yield axiosApi.get('/events', );
         yield put(setEvents(response.data));
     } catch (e) {
-        console.log(e)
+        if (e.response.status !== 401) {
+            toast.error('Fetch to events failed');
+            console.log(e)
+        }
     }
 }
 
-export default [
-    takeEvery(SET_EVENTS, categoriesSagas),
+const eventsSaga = [
+    takeEvery(FETCH_EVENTS, categoriesSagas)
 ];
+
+export default eventsSaga;

@@ -9,12 +9,21 @@ import {Link} from "react-router-dom";
 const Main = (props) => {
     const dispatch = useDispatch();
     const event = useSelector(state => state.reducer.events);
+    const user = useSelector(state => state.users.user);
+
+    const userCheck = () => {
+        if (user !== null) {
+            return user.username;
+        } else {
+            return ''
+        }
+    };
 
     useEffect(() => {
-        dispatch(fetchEvents())
+        dispatch(fetchEvents(userCheck()))
     }, [dispatch]);
 
-    const  printEvent = () => {
+    const printEvent = () => {
         if (event) {
             return event.map(event => {
                 return (
@@ -24,6 +33,7 @@ const Main = (props) => {
                         text={event.text}
                         date={event.date}
                         duration={event.duration}
+                        author={event.author}
                     />
                 )
             })
@@ -37,16 +47,6 @@ const Main = (props) => {
                 <Link to='/newEvent' className="newEvent">New event</Link>
             </div>
             <div className="cards">
-                <EventCard/>
-                <EventCard/>
-                <EventCard/>
-                <EventCard/>
-                <EventCard/>
-                <EventCard/>
-                <EventCard/>
-                <EventCard/>
-                <EventCard/>
-                <EventCard/>
                 {printEvent()}
             </div>
         </div>
