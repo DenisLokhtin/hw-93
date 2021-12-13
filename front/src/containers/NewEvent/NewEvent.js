@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
-import {createEvent} from "../../store/actions/actions";
+import {SET_EVENTS} from "../../store/actions/actions";
 
 const NewEvent = (props) => {
     const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const NewEvent = (props) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        dispatch(createEvent());
+        dispatch(SET_EVENTS());
     };
 
     return (

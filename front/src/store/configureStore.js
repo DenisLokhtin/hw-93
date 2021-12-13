@@ -4,6 +4,8 @@ import Reducer from "./reducers/Reducer";
 import usersReducer from "./reducers/usersReducer";
 import {loadFromLocalStorage, saveToLocalStorage} from "./localStorage";
 import axiosApi from "../axiosApi";
+import createSagaMiddleware from 'redux-saga';
+import {rootSagas} from "./rootSagas";
 
 
 const rootReducer = combineReducers({
@@ -15,11 +17,20 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const persistedState = loadFromLocalStorage();
 
+const sagaMiddleware = createSagaMiddleware();
+
+const middleware = [
+    thunk,
+    sagaMiddleware,
+];
+
 const store = createStore(
     rootReducer,
     persistedState,
-    composeEnhancers(applyMiddleware(thunk))
+    composeEnhancers(applyMiddleware(...middleware))
 );
+
+sagaMiddleware.run(rootSagas);
 
 store.subscribe(() => {
     saveToLocalStorage({
