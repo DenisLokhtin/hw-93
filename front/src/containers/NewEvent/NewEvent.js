@@ -51,6 +51,7 @@ const NewEvent = (props) => {
                     value={data.date}
                     onChange={(event => setData({...data, date: event.target.value}))}
                     type="date"
+                    min={1}
                     id="date"
                     name="date"
                 />

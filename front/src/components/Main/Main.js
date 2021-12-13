@@ -20,7 +20,7 @@ const Main = (props) => {
     };
 
     useEffect(() => {
-        dispatch(fetchEvents(userCheck()))
+        dispatch(fetchEvents())
     }, [dispatch]);
 
     const printEvent = () => {

@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/', auth, async (req, res) => {
   try {
-    const Events = await Event.find({author: req.user.username});
+    const Events = await Event.find({author: req.user.username}).sort({date: 1});
     res.send(Events);
   } catch (e) {
     res.sendStatus(500);
